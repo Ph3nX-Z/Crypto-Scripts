@@ -23,20 +23,13 @@ class Block:
         self.hash = sha256(bytes(chaine, 'utf-8')).hexdigest()
         return sha256(bytes(chaine, 'utf-8')).hexdigest()
     def __str__(self):
-        liste = []
-        liste.append(f"\nInfos for Block number {self.num_block}")
-        liste.append(f"- Last hash : {self.hash_precedent}")
-        liste.append(f"- Hash      : {self.hash}")
-        liste.append(f"- Valid     : {self.valide}")
-        liste.append(f"- Nonce     : {self.nonce}")
-        liste.append(f"- Time      : {self.time}\n")
-        table = '\n'.join(liste)
+        table = '\n'.join([f"\nInfos for Block number {self.num_block}",f"- Last hash : {self.hash_precedent}",f"- Hash      : {self.hash}",f"- Valid     : {self.valide}",f"- Nonce     : {self.nonce}",f"- Time      : {self.time}\n"])
         return table
     def minage(self):
         start = time.time()
         print('\033[94m'+f"\n[*] Mining Block {self.num_block}"+'\033[0m')
         self.hash = ""
-        while self.hash[:4]!="0000":
+        while self.hash[:2]!="00":
             self._hashage()
             self.nonce += 1
         self.nonce -= 1
